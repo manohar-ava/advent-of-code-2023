@@ -20,30 +20,19 @@ func isStar(s string) bool {
 	return s == "*"
 }
 func getProduct(x int, y int, mat [][]string) int {
-	dirs := map[string][][]int{
-		"left": {
-			{0, -1},
-		},
-		"up": {
-			{-1, -1}, {-1, 0}, {-1, 1},
-		},
-		"down": {
-			{1, 1}, {1, 0}, {1, -1},
-		},
-		"right": {
-			{0, 1},
-		},
+	dirs := [][]int{
+		{0, -1},
+		{-1, -1}, {-1, 0}, {-1, 1},
+		{1, 1}, {1, 0}, {1, -1},
+		{0, 1},
 	}
-	nums := map[int]bool{}
-
+	nums := map[int]int{}
 	for _, dir := range dirs {
-		for _, val := range dir {
-			dx, dy := val[0], val[1]
-			cur := mat[dx+x][dy+y]
-			if isNumber(cur) {
-				rem := getNumAtDirection(dx+x, dy+y, mat)
-				nums[rem] = true
-			}
+		dx, dy := dir[0], dir[1]
+		cur := mat[dx+x][dy+y]
+		if isNumber(cur) {
+			rem := getNumAtDirection(dx+x, dy+y, mat)
+			nums[rem] = true
 		}
 	}
 	fmt.Println(nums)
